@@ -1,0 +1,16 @@
+# .gitignore
+# @authors Dibyasmita
+# @date 25 - 02 - 2026
+# @description Contains the files and directories to ignore.
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env

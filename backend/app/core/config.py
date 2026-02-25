@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     MAIL_PORT: int
     MAIL_SERVER: str
     MAIN_EMAIL_TO: str
+    FRONTEND_URL: str
     
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
