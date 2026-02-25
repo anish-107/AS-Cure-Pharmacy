@@ -1,0 +1,38 @@
+/** tsconfig.node.json
+ * @author Dibyasmita
+ * @date 18-1-2026
+ * @description This file contains the configurations for node js.
+ * @returns Node Configurations
+ */
+
+
+// Rules
+{
+  /* Compiler options */
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  
+  /* Files to include */
+  "include": ["vite.config.ts"]
+}

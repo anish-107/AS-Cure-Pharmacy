@@ -1,0 +1,30 @@
+/** tsconfig.json
+ * @author Dibyasmita
+ * @date 18-1-2026
+ * @description This file contains the configurations for typescript.
+ * @returns Typescript Configurations
+ */
+ 
+// Rules
+{
+  /* Files */
+  "files": [],
+  
+  /* References */
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  
+  /* Compiler options */
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
