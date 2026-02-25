@@ -23,7 +23,7 @@ type ReviewFormData = {
 
 // Environment Variables
 // Replace the fallback URL with your actual Vercel URL
-const REVIEWS_API_URL = import.meta.env.VITE_REVIEWS_API_URL || "https://as-cure-pharmacy-backend.vercel.app/api/reviews/";
+const REVIEWS_API_URL = import.meta.env.VITE_REVIEWS_API_URL || "";
 
 export default function Reviews() {
   const [formData, setFormData] = useState<ReviewFormData>({

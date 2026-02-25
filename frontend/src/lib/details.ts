@@ -9,8 +9,6 @@
 
 // Imports
 import type { LucideIcon } from "lucide-react";
-import { Award, Users, Microscope } from "lucide-react";
-
 
 // Type Definitions
 export type StatItem = {

@@ -28,7 +28,7 @@ type FormField = keyof ContactFormData;
 const COMPANY_EMAIL = import.meta.env.VITE_COMPANY_EMAIL;
 const COMPANY_PHONE = import.meta.env.VITE_COMPANY_PHONE;
 const COMPANY_ADDRESS = import.meta.env.VITE_COMPANY_ADDRESS;
-const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || "https://as-cure-pharmacy-backend.vercel.app/api/contact/";
+const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || "";
 
 // Constants
 const textFields: FormField[] = ["firstName", "lastName"];

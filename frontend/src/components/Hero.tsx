@@ -15,12 +15,11 @@ import ReviewCard from "./ReviewCard";
 import Reviews from "./Reviews";
 import { MessageSquarePlus, X, ChevronLeft, ChevronRight } from "lucide-react";
 
-// Content
+// Content (Removed reviewsList)
 import {
   whyChooseContent,
   whyChooseList,
   reviewsContent,
-  reviewsList,
 } from "@/lib/details";
 
 // Type Hints
@@ -32,17 +31,16 @@ type DbReview = {
   created_at: string;
 };
 
-// Strictly typed shape to satisfy TypeScript for both static and DB reviews
+// Strictly typed shape to satisfy TypeScript for DB reviews
 type NormalizedReview = {
   id: string | number;
   name: string;
-  role?: string;
   stars?: number;
   message: string;
 };
 
 // Environment Variables
-const REVIEWS_API_URL = import.meta.env.VITE_REVIEWS_API_URL || "https://as-cure-pharmacy-backend.vercel.app/api/reviews/";
+const REVIEWS_API_URL = import.meta.env.VITE_REVIEWS_API_URL || "";
 
 // Exports
 export default function Hero() {
@@ -72,21 +70,13 @@ export default function Hero() {
     fetchReviews();
   }, [showReviewForm]);
 
-  // 2. Normalize the data to prevent TypeScript errors
-  const displayReviews: NormalizedReview[] = dbReviews.length > 0
-    ? dbReviews.map((r) => ({
-        id: r.review_id,
-        name: r.user_name,
-        stars: r.stars,
-        message: r.review,
-      }))
-    // We strictly type the incoming static list map to satisfy ESLint
-    : reviewsList.map((r: { name: string; role?: string; message: string }, i: number) => ({
-        id: `static-${i}`,
-        name: r.name,
-        role: r.role,
-        message: r.message,
-      }));
+  // 2. Normalize the DB data to prevent TypeScript errors
+  const displayReviews: NormalizedReview[] = dbReviews.map((r) => ({
+    id: r.review_id,
+    name: r.user_name,
+    stars: r.stars,
+    message: r.review,
+  }));
 
   // 3. Auto-scroll Logic
   useEffect(() => {
@@ -110,7 +100,7 @@ export default function Hero() {
     return () => clearInterval(intervalId);
   }, [isPaused, displayReviews.length]);
 
-  // 4. Manual manual scroll function for arrows
+  // 4. Manual scroll function for arrows
   const scroll = (direction: "left" | "right") => {
     if (carouselRef.current) {
       const scrollAmount = direction === "left" ? -340 : 340;
@@ -218,23 +208,27 @@ export default function Hero() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Left Arrow */}
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 z-20 p-3 rounded-full bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:scale-110 hover:text-blue-600 transition-all opacity-0 hover:opacity-100 md:opacity-100 hidden md:flex items-center justify-center focus:outline-none"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
+          {/* Left Arrow (Only show if there are reviews) */}
+          {displayReviews.length > 0 && (
+            <button
+              onClick={() => scroll("left")}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 z-20 p-3 rounded-full bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:scale-110 hover:text-blue-600 transition-all opacity-0 hover:opacity-100 md:opacity-100 hidden md:flex items-center justify-center focus:outline-none"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+          )}
 
-          {/* Right Arrow */}
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 z-20 p-3 rounded-full bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:scale-110 hover:text-blue-600 transition-all opacity-0 hover:opacity-100 md:opacity-100 hidden md:flex items-center justify-center focus:outline-none"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
+          {/* Right Arrow (Only show if there are reviews) */}
+          {displayReviews.length > 0 && (
+            <button
+              onClick={() => scroll("right")}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 z-20 p-3 rounded-full bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:scale-110 hover:text-blue-600 transition-all opacity-0 hover:opacity-100 md:opacity-100 hidden md:flex items-center justify-center focus:outline-none"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          )}
 
           {/* Scrollable Container with Spotlight Group Class */}
           <div
@@ -251,7 +245,7 @@ export default function Hero() {
               <div className="w-full text-center py-10" style={{ color: "var(--color-text-muted)" }}>
                 Loading latest reviews...
               </div>
-            ) : (
+            ) : displayReviews.length > 0 ? (
               displayReviews.map((review, index) => (
                 <div 
                   key={review.id} 
@@ -260,13 +254,16 @@ export default function Hero() {
                 >
                   <ReviewCard
                     name={review.name}
-                    role={review.role}
                     stars={review.stars}
                     message={review.message}
                     colorIndex={index}
                   />
                 </div>
               ))
+            ) : (
+              <div className="w-full text-center py-10 font-medium" style={{ color: "var(--color-text-muted)" }}>
+                Be the first to leave a review!
+              </div>
             )}
           </div>
         </div>
