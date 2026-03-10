@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
   { label: "About", id: "about" },
   { label: "Products", id: "products" },
   { label: "Why Us", id: "why-us" },
+  { label: "Review", id: "review"},
   { label: "Contact", id: "contact" },
 ];
 
