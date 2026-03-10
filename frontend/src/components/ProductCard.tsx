@@ -21,6 +21,7 @@ export default function ProductCard({
   name,
   composition,
   description,
+  highlights,
   image,
   featured,
 }: ProductItem) {
@@ -96,7 +97,7 @@ export default function ProductCard({
               }}
             >
               <MessageCircle className="w-4 h-4" />
-              Buy Now
+              Enquire
             </a>
 
             <button
@@ -132,6 +133,7 @@ export default function ProductCard({
               >
                 {name}
               </h3>
+
               <button
                 onClick={() => setOpen(false)}
                 className="w-8 h-8 flex items-center justify-center rounded-full"
@@ -148,11 +150,28 @@ export default function ProductCard({
             />
 
             <p
+              className="text-sm font-medium mb-2"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              Composition: {composition}
+            </p>
+
+            <p
               className="text-sm mb-4"
               style={{ color: "var(--color-text-secondary)" }}
             >
               {description}
             </p>
+
+            {/* Highlights */}
+            <ul
+              className="list-disc pl-5 mb-6 space-y-2 text-sm"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              {highlights.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
 
             <a
               href={whatsappLink}
