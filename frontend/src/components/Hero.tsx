@@ -1,111 +1,50 @@
-/** Slider.tsx
+/** Hero.tsx
  * @author Dibyasmita
- * @description Slider / Hero Component with background carousel
- * @date 18-1-2026
+ * @description This is the Hero Component (Why Choose Us Section)
+ * @date 26-02-2026
  * @returns a TSX component
  */
 
-
-// Rules
 "use client";
 
-// Imports
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { whyChooseContent, whyChooseList } from "@/lib/details";
 
-// Content Imports
-import type { HeroSlide } from "@/lib/details";
-import { heroSlides } from "@/lib/details";
+export default function Hero() {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
-// Exports
-export default function Slider() {
-  const [current, setCurrent] = useState<number>(0);
-
-  /* Auto Slide */
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  /* Navigation Helpers */
-  const goTo = (index: number) => setCurrent(index);
-  const prev = () =>
-    setCurrent((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  const next = () =>
-    setCurrent((prev) => (prev + 1) % heroSlides.length);
+  const toggleCard = (index: number) => {
+    setActiveCard((prev) => (prev === index ? null : index));
+  };
 
   return (
     <section
-      id="home"
-      className="relative h-[90vh] w-full overflow-hidden"
+      id="why-us"
+      className="py-20 px-6 md:px-12 transition-all duration-500"
       style={{ backgroundColor: "var(--color-bg-main)" }}
     >
-      {/* Slides */}
-      {heroSlides.map((slide: HeroSlide, index: number) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1000 ${
-            index === current ? "opacity-100 scale-100" : "opacity-0 scale-105"
-          }`}
-        >
-          {/* Background Image */}
+      <div className="max-w-7xl mx-auto">
+        {/* WHY CHOOSE US */}
+        <div className="text-center mb-14">
           <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          />
-
-          {/* Gradient Overlays */}
-          <div
-            className="absolute inset-0"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4"
             style={{
-              background:
-                "linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.4), rgba(0,0,0,0.2))",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.45), transparent)",
-            }}
-          />
-
-          {/* Decorative Glows */}
-          <div
-            className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-40"
-            style={{ backgroundColor: "var(--color-primary)" }}
-          />
-          <div
-            className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl opacity-30"
-            style={{ backgroundColor: "var(--color-secondary)" }}
-          />
-        </div>
-      ))}
-
-      {/* Content */}
-      <div className="relative z-10 flex h-full items-center px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="max-w-2xl">
-          {/* Accent Badge */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm"
-            style={{
-              backgroundColor: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.2)",
-              color: "#ffffff",
+              backgroundColor: "var(--color-primary-light)",
+              color: "var(--color-primary-dark)",
             }}
           >
             <span
-              className="w-2 h-2 rounded-full animate-pulse"
+              className="w-2 h-2 rounded-full"
               style={{ backgroundColor: "var(--color-primary)" }}
             />
-            {heroSlides[current].accent}
+            {whyChooseContent.badge}
           </div>
 
-          {/* Title */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight">
+          <h2
+            className="text-3xl md:text-4xl font-bold"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            {whyChooseContent.title}{" "}
             <span
               style={{
                 background:
@@ -114,87 +53,60 @@ export default function Slider() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              {heroSlides[current].title.split(" ")[0]}
-            </span>{" "}
-            {heroSlides[current].title.split(" ").slice(1).join(" ")}
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl text-white/80 mb-8">
-            {heroSlides[current].subtitle}
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="#products"
-              className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-xl font-medium transition-all hover:-translate-y-0.5"
-              style={{
-                background:
-                  "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
-                boxShadow: "0 10px 15px var(--color-shadow)",
-              }}
-            >
-              View Products
-              <ArrowRight className="w-4 h-4" />
-            </a>
-
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all text-white"
-              style={{
-                backgroundColor: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.25)",
-              }}
-            >
-              Learn More
-            </a>
-          </div>
+              {whyChooseContent.highlightedTitle}
+            </span>
+            ?
+          </h2>
         </div>
-      </div>
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prev}
-        aria-label="Previous slide"
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center text-white"
-        style={{
-          backgroundColor: "rgba(255,255,255,0.1)",
-          border: "1px solid rgba(255,255,255,0.25)",
-        }}
-      >
-        <ChevronLeft />
-      </button>
+        {/* ICON + TITLE + TOGGLE DESCRIPTION */}
+        <div className="flex flex-wrap justify-center gap-16">
+          {whyChooseList.map((item, index) => {
+            const isOpen = activeCard === index;
 
-      <button
-        onClick={next}
-        aria-label="Next slide"
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center text-white"
-        style={{
-          backgroundColor: "rgba(255,255,255,0.1)",
-          border: "1px solid rgba(255,255,255,0.25)",
-        }}
-      >
-        <ChevronRight />
-      </button>
+            return (
+              <div
+                key={index}
+                className="flex flex-col items-center max-w-xs text-center"
+              >
+                {/* ICON */}
+                <button
+                  onClick={() => toggleCard(index)}
+                  className="p-6 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                  style={{
+                    background:
+                      "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
+                    color: "white",
+                  }}
+                >
+                  <item.icon size={32} />
+                </button>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {heroSlides.map((_: HeroSlide, index: number) => (
-          <button
-            key={index}
-            onClick={() => goTo(index)}
-            className="h-2 rounded-full transition-all"
-            style={{
-              width: index === current ? "32px" : "8px",
-              backgroundColor:
-                index === current
-                  ? "var(--color-primary)"
-                  : "rgba(255,255,255,0.4)",
-            }}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+                {/* TITLE ALWAYS VISIBLE */}
+                <h3
+                  className="mt-4 text-lg font-semibold"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
+                  {item.title}
+                </h3>
+
+                {/* DESCRIPTION (TOGGLE) */}
+                <div
+                  className={`transition-all duration-500 overflow-hidden ${
+                    isOpen ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <p
+                    className="text-sm"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
