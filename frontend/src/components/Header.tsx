@@ -17,13 +17,13 @@ type NavItem = {
   id: string;
 };
 
+
 // Constants
 const navItems: NavItem[] = [
   { label: "Home", id: "home" },
   { label: "About", id: "about" },
   { label: "Products", id: "products" },
   { label: "Why Us", id: "why-us" },
-  { label: "Review", id: "review"},
   { label: "Contact", id: "contact" },
 ];
 
