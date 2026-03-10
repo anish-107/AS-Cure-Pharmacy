@@ -10,7 +10,6 @@
 
 // Imports
 import { CheckCircle2 } from "lucide-react";
-// Removed unused StatItem and aboutUsStats imports
 import { aboutUsContent } from "@/lib/details";
 
 // Exports
@@ -111,7 +110,7 @@ export default function AboutUs() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              You deserve the best in care.
+              You Deserve The Best In Quality With Care
             </p>
           </div>
         </div>
