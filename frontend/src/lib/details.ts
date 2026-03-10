@@ -33,16 +33,19 @@ export type SectionContent = {
 // About Us Content
 export const aboutUsContent: SectionContent = {
   badge: "About Us",
-  title: "Delivering Quality",
+  title: "Delivering Trusted",
   highlightedTitle: "Healthcare Solutions",
   description:
-    "At A S Cure Pharma, we are committed to delivering safe, effective, and high-quality pharmaceutical products that people can trust. Every product is developed and tested under strict quality standards to ensure consistency, safety, and reliability.",
+    "At A S Cure Pharma, our mission is to enhance lives by providing safe, reliable, and high-quality pharmaceutical products. We believe that healthcare should be accessible, trustworthy, and effective for everyone. Our team works with dedication and scientific precision to develop medicines that meet the highest standards of safety, efficacy, and quality. Through continuous innovation, advanced manufacturing practices, and strict regulatory compliance, we strive to deliver healthcare solutions that professionals and patients can depend on every day.",
+
   points: [
-    "Safe, effective, and high-quality medicines",
-    "Strict quality standards for safety and consistency",
-    "Experienced professionals and modern facilities",
-    "Focus on improving healthcare outcomes",
+    "Manufacturing safe, effective, and high-quality pharmaceutical products",
+    "Maintaining strict quality control and regulatory compliance at every stage",
+    "Driven by experienced professionals and supported by modern infrastructure",
+    "Committed to improving patient health and overall healthcare outcomes",
+    "Focused on innovation, reliability, and long-term healthcare impact",
   ],
+
   image: {
     src: "assets/about-us.png",
     alt: "A S Cure Pharma Production Facility",
@@ -60,9 +63,9 @@ export type HeroSlide = {
 
 export const heroSlides: HeroSlide[] = [
   {
-    image: "assets/hero-1.jpg",
+    image: "assets/hero-1.png",
     title: "A S CURE PHARMA",
-    subtitle: "You Deserve the Best in Care...",
+    subtitle: "You Deserve The Best In Quality With Care",
     accent: "Quality Healthcare Solutions",
   },
   {
@@ -97,9 +100,10 @@ export const productsList: ProductItem[] = [
     description:
       "RABTORIN DSR provides dual-action relief for acid-related gastrointestinal disorders. Its advanced release technology ensures effective and sustained control of symptoms.",
     highlights: [
-      "Dual-action relief",
-      "Advanced release technology",
-      "Broad GI coverage",
+      "Provides dual-action relief for acid reflux and GERD",
+      "Advanced release technology for sustained symptom control",
+      "Helps reduce stomach acid and improves digestion",
+      "Effective in treating gastric discomfort and heartburn",
     ],
     image: "products/rabtorin-dsr.jpg",
     featured: true,
@@ -111,9 +115,10 @@ export const productsList: ProductItem[] = [
     description:
       "FLEMIREX SP offers triple-action pain control with anti-inflammatory, analgesic, and enzyme-based support for faster recovery.",
     highlights: [
-      "Triple-action pain control",
-      "Faster recovery support",
-      "Suitable for joint and muscle pain",
+      "Triple-action formula for pain and inflammation",
+      "Reduces swelling and improves mobility",
+      "Provides fast and effective pain relief",
+      "Commonly used for joint pain, muscle pain, and post-surgical recovery",
     ],
     image: "products/flemirex-sp.jpg",
     featured: true,
@@ -124,10 +129,13 @@ export const productsList: ProductItem[] = [
     description:
       "GABINOXIN-300 NT is formulated for powerful neuropathic pain relief using a complementary dual-mechanism approach.",
     highlights: [
-      "Powerful neuropathic pain relief",
-      "Complementary dual mechanism",
+      "Effective treatment for neuropathic pain",
+      "Dual-mechanism approach for improved nerve pain relief",
+      "Supports management of chronic nerve-related conditions",
+      "Helps improve patient comfort and quality of life",
     ],
     image: "products/gabinoxin-300-nt.jpg",
+    featured: true,
   },
   {
     name: "GABINOXIN-100 NT",
@@ -135,19 +143,25 @@ export const productsList: ProductItem[] = [
     description:
       "GABINOXIN-100 NT delivers targeted nerve-pain control and is particularly beneficial in managing diabetic neuropathy.",
     highlights: [
-      "Targeted nerve-pain control",
-      "Benefits diabetic neuropathy",
+      "Targeted relief for nerve-related pain",
+      "Helps manage diabetic neuropathy symptoms",
+      "Improves nerve stability and pain control",
+      "Designed for consistent and reliable therapy",
     ],
     image: "products/gabinoxin-100-nt.jpg",
+    featured: true,
   },
 ];
 
-
 // Why Choose Us Section
+
 import {
   ShieldCheck,
   Gauge,
   Heart,
+  FlaskConical,
+  Handshake,
+  Sparkles,
 } from "lucide-react";
 
 export type WhyChooseItem = {
@@ -167,22 +181,39 @@ export const whyChooseList: WhyChooseItem[] = [
     icon: ShieldCheck,
     title: "Tested Trust, Delivered",
     description:
-      "Every medicine undergoes strict laboratory testing to ensure purity, potency, and consistent performance.",
+      "At A S Cure Pharma, every medicine is backed by transparent laboratory testing reports to ensure purity, potency, and reliable performance. Our science-based assurance builds trust where it matters most.",
   },
   {
     icon: Gauge,
     title: "Stringent Quality Standards",
     description:
-      "Our manufacturing processes strictly follow GLP and GMP guidelines at every stage.",
+      "Our manufacturing and quality control processes strictly follow GLP (Good Laboratory Practice) and GMP (Good Manufacturing Practice) guidelines from raw material sourcing to final packaging.",
   },
   {
     icon: Heart,
     title: "Patient-First Philosophy",
     description:
-      "Our formulations are designed for easier administration, optimized dosages, and faster recovery.",
+      "Our formulations are designed for real patients, focusing on ease of administration, minimized side effects through optimized dosages, and improved recovery outcomes with higher bioavailability.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Certified Lab Testing for Every Batch",
+    description:
+      "Each product undergoes rigorous analytical testing using validated scientific methods to ensure content uniformity, long-term stability, microbial safety, and chemical purity.",
+  },
+  {
+    icon: Handshake,
+    title: "Ethical & Transparent Practices",
+    description:
+      "We maintain complete transparency with healthcare professionals, pharmacists, and patients while upholding strong ethical standards that foster long-term trust with every stakeholder.",
+  },
+  {
+    icon: Sparkles,
+    title: "Innovation-Driven Excellence",
+    description:
+      "We continuously explore advanced formulation technologies, taste masking solutions, and patient-compliance innovations to make our medicines more effective and patient-friendly.",
   },
 ];
-
 
 // Reviews / Testimonials Section
 export type ReviewItem = {
