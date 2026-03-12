@@ -9,9 +9,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-/*---break---
- */
+
+
 @custom-variant dark (&:is(.dark *));
+
 
 /* Light Theme (Default) */
 :root {
@@ -225,8 +226,6 @@ body {
   background-color: var(--color-secondary-dark);
 }
 
-/*---break---
- */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -269,8 +268,6 @@ body {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/*---break---
- */
 
 @layer base {
   * {

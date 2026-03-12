@@ -14,6 +14,10 @@ import { aboutUsContent } from "@/lib/details";
 
 // Exports
 export default function AboutUs() {
+  // Logic
+  // If neeeded in future
+  
+  // Return
   return (
     <section
       id="about"
@@ -42,7 +46,6 @@ export default function AboutUs() {
                 }}
               />
             </div>
-            {/* Floating Stats Card removed here */}
           </div>
 
           {/* Text Side */}

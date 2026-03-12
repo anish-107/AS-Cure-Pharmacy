@@ -15,7 +15,12 @@ import { Package } from "lucide-react";
 // Content
 import { productsList } from "@/lib/details";
 
+// Exports
 export default function Products() {
+  // Logic
+  // If needed in future
+  
+  // Return
   return (
     <section
       id="products"

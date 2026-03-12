@@ -3,6 +3,7 @@
  * @description This is the Review Submission Component
  * @date 25-02-2026
  * @returns a TSX component
+ * This file is not being used as asked by the client, if needed in future, reviews component can be reused from this file and ReviewCard.tsx
  */
 
 // Rules
@@ -22,10 +23,12 @@ type ReviewFormData = {
 };
 
 // Environment Variables
-// Replace the fallback URL with your actual Vercel URL
 const REVIEWS_API_URL = import.meta.env.VITE_REVIEWS_API_URL || "";
 
+// Exports
 export default function Reviews() {
+  // Logic
+  
   const [formData, setFormData] = useState<ReviewFormData>({
     user_name: "",
     email: "",
@@ -66,7 +69,7 @@ export default function Reviews() {
     setError(null);
 
     try {
-      // 1. Map frontend React state to the exact schema
+      // Map frontend React state to the exact schema
       const payload = {
         user_name: formData.user_name.trim(),
         email: formData.email.trim(),
@@ -74,14 +77,14 @@ export default function Reviews() {
         review: formData.review.trim(),
       };
 
-      // 2. Send the POST request to the backend
+      // Send the POST request to the backend
       const response = await fetch(REVIEWS_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      // 3. Handle errors (including the 5/minute Rate Limiter)
+      // Handle errors 
       if (!response.ok) {
         if (response.status === 429) {
           throw new Error("You are submitting reviews too quickly. Please wait a moment.");
@@ -89,7 +92,7 @@ export default function Reviews() {
         throw new Error("Failed to submit review. Please check your connection.");
       }
 
-      // 4. Success Reset
+      // Success Reset
       setSuccess(true);
       setFormData({
         user_name: "",
@@ -108,6 +111,7 @@ export default function Reviews() {
     }
   };
 
+  // Return
   return (
     <section
       className="relative py-20 px-6 md:px-12"
@@ -256,4 +260,4 @@ export default function Reviews() {
       </div>
     </section>
   );
-}
+};

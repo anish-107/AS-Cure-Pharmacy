@@ -17,6 +17,7 @@ const quickLinks = [
   { label: "About", href: "#about" },
   { label: "Products", href: "#products" },
   { label: "Why Us", href: "#why-us" },
+  { label: "Associates", id: "associates" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -28,6 +29,10 @@ const COMPANY_MAP_URL = import.meta.env.VITE_COMPANY_MAP_URL;
 
 // Exports
 export default function Footer() {
+  // Logic
+  // If needed in future
+  
+  // Return
   return (
     <footer
       style={{

@@ -2,7 +2,7 @@
  * @authors Dibyasmita
  * @date 18-1-2026
  * @description This file contains the hook to switch themes.
- * @returns Custom hook
+ * @returns Custom hook to switch theme
  */
 
 
@@ -14,10 +14,13 @@ type Theme = "light" | "dark";
 
 // Exports
 export function useTheme() {
+  // Logic
+  
   const [theme, setTheme] = useState<Theme>(() => {
     return (localStorage.getItem("theme") as Theme) || "light";
   });
 
+  
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
@@ -26,9 +29,13 @@ export function useTheme() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  
   const toggleTheme = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"));
   };
 
-  return { theme, toggleTheme };
+  // Return
+  return {
+    theme, toggleTheme
+  };
 };

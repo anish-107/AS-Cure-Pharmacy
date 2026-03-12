@@ -17,18 +17,20 @@ type NavItem = {
   id: string;
 };
 
-
 // Constants
 const navItems: NavItem[] = [
   { label: "Home", id: "home" },
   { label: "About", id: "about" },
   { label: "Products", id: "products" },
   { label: "Why Us", id: "why-us" },
+  { label: "Associates", id: "associates" },
   { label: "Contact", id: "contact" },
 ];
 
 // Exports
 export default function Header() {
+  // Logic
+  
   const [activeSection, setActiveSection] = useState<string>("home");
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -82,6 +84,7 @@ export default function Header() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
+  // Return
   return (
     <header
       className="sticky top-0 z-50 transition-all duration-300 backdrop-blur-md"

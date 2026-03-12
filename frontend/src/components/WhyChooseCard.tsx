@@ -39,8 +39,11 @@ export default function WhyChooseCard({
   description,
   colorIndex = 0,
 }: WhyChooseCardProps) {
+  // Logic
+  
   const color = colors[colorIndex % colors.length];
 
+  // Return
   return (
     <div
       className="
@@ -103,4 +106,4 @@ export default function WhyChooseCard({
       </div>
     </div>
   );
-}
+};

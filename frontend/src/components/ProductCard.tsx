@@ -25,6 +25,8 @@ export default function ProductCard({
   image,
   featured,
 }: ProductItem) {
+  // Logic
+  
   const [open, setOpen] = useState<boolean>(false);
 
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string;
@@ -32,6 +34,7 @@ export default function ProductCard({
     `I am interested in ${name}`
   )}`;
 
+  // Return
   return (
     <>
       {/* Card */}

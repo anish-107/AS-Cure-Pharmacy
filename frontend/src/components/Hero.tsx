@@ -5,18 +5,25 @@
  * @returns a TSX component
  */
 
+ // Rules
 "use client";
 
+// Imports
 import { useState } from "react";
 import { whyChooseContent, whyChooseList } from "@/lib/details";
 
+
+// Exports
 export default function Hero() {
+  // Logic
+  
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const toggleCard = (index: number) => {
     setActiveCard((prev) => (prev === index ? null : index));
   };
 
+  // Return
   return (
     <section
       id="why-us"
@@ -59,7 +66,6 @@ export default function Hero() {
           </h2>
         </div>
 
-        {/* ICON + TITLE + TOGGLE DESCRIPTION */}
         <div className="flex flex-wrap justify-center gap-16">
           {whyChooseList.map((item, index) => {
             const isOpen = activeCard === index;
@@ -82,7 +88,6 @@ export default function Hero() {
                   <item.icon size={32} />
                 </button>
 
-                {/* TITLE ALWAYS VISIBLE */}
                 <h3
                   className="mt-4 text-lg font-semibold"
                   style={{ color: "var(--color-text-primary)" }}
@@ -90,7 +95,6 @@ export default function Hero() {
                   {item.title}
                 </h3>
 
-                {/* DESCRIPTION (TOGGLE) */}
                 <div
                   className={`transition-all duration-500 overflow-hidden ${
                     isOpen ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0"
@@ -110,4 +114,4 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+};

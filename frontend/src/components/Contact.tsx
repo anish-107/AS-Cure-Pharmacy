@@ -5,13 +5,16 @@
  * @returns a TSX component
  */
 
+ 
 // Rules
 "use client";
+
 
 // Imports
 import type React from "react";
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Sparkles } from "lucide-react";
+
 
 // Type Hints
 type ContactFormData = {
@@ -24,18 +27,24 @@ type ContactFormData = {
 
 type FormField = keyof ContactFormData;
 
+
 // Environment Variables
 const COMPANY_EMAIL = import.meta.env.VITE_COMPANY_EMAIL;
 const COMPANY_PHONE = import.meta.env.VITE_COMPANY_PHONE;
 const COMPANY_ADDRESS = import.meta.env.VITE_COMPANY_ADDRESS;
 const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || "";
 
+
 // Constants
 const textFields: FormField[] = ["firstName", "lastName"];
 const singleFields: FormField[] = ["email", "subject"];
 
+
 // Exports
 export default function Contact() {
+  // Logic
+  
+  // Constants
   const [formData, setFormData] = useState<ContactFormData>({
     firstName: "",
     lastName: "",
@@ -49,7 +58,8 @@ export default function Contact() {
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  /* Handle Input Change */
+  
+  // Handle Input Changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -60,7 +70,7 @@ export default function Contact() {
     }));
   };
 
-  /* Actual API Submit Handler */
+  // API Handler 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -68,7 +78,6 @@ export default function Contact() {
     setError(null);
 
     try {
-      // 1. Map frontend React state to the FastAPI backend schema
       const payload = {
         form_name: `${formData.firstName} ${formData.lastName}`.trim(),
         form_email: formData.email,
@@ -76,14 +85,12 @@ export default function Contact() {
         form_content: formData.message,
       };
 
-      // 2. Send the POST request to the Vercel backend
       const response = await fetch(CONTACT_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      // 3. Handle errors (including the SlowAPI Rate Limiter)
       if (!response.ok) {
         if (response.status === 429) {
           throw new Error("You have sent too many messages. Please try again later.");
@@ -91,7 +98,6 @@ export default function Contact() {
         throw new Error("Failed to send message. Please verify your connection.");
       }
 
-      // 4. Success Reset
       setSuccess(true);
       setFormData({
         firstName: "",
@@ -111,28 +117,47 @@ export default function Contact() {
     }
   };
 
+  // Contact Card Constant
   const contactCards = [
-    { icon: Mail, label: "Email Us", value: COMPANY_EMAIL },
-    { icon: Phone, label: "Call Us", value: COMPANY_PHONE },
-    { icon: MapPin, label: "Visit Us", value: COMPANY_ADDRESS },
+    {
+      icon: Mail,
+      label: "Email Us",
+      value: COMPANY_EMAIL,
+      href: `mailto:${COMPANY_EMAIL}`,
+    },
+    {
+      icon: Phone,
+      label: "Call Us",
+      value: COMPANY_PHONE,
+      href: `tel:${COMPANY_PHONE}`,
+    },
+    {
+      icon: MapPin,
+      label: "Visit Us",
+      value: COMPANY_ADDRESS,
+      href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        COMPANY_ADDRESS || ""
+      )}`,
+    },
   ];
 
+  // Return
   return (
     <section
       className="relative min-h-screen p-6 md:p-12"
       style={{
         background:
-          "linear-gradient(to bottom right, var(--color-bg-section), var(--color-bg-main))",
+          "var(--color-bg-main)",
       }}
     >
       {/* Background Glow */}
       <div className="absolute inset-0 -z-10">
         <div
-          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-40"
           style={{ background: "var(--color-primary-light)" }}
         />
         <div
-          className="absolute bottom-20 right-10 w-72 h-72 rounded-full blur-3xl"
+          className="absolute bottom-20 right-10 w-72 h-72 rounded-full blur-3xl opacity-40"
           style={{ background: "var(--color-secondary-light)" }}
         />
       </div>
@@ -180,9 +205,12 @@ export default function Contact() {
           {/* Contact Cards */}
           <div className="lg:col-span-2 space-y-5">
             {contactCards.map((card, index) => (
-              <div
+              <a
                 key={index}
-                className="rounded-2xl p-6 border shadow-sm border-gray-300 dark:border-gray-700"
+                href={card.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl p-6 border shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 border-gray-200 dark:border-gray-700"
                 style={{
                   backgroundColor: "var(--color-bg-card)",
                 }}
@@ -206,21 +234,21 @@ export default function Contact() {
                       {card.label}
                     </p>
                     <p
-                      className="font-medium"
+                      className="font-medium wrap-break-word"
                       style={{ color: "var(--color-text-primary)" }}
                     >
                       {card.value}
                     </p>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-3">
             <div
-              className="rounded-3xl p-10 shadow-2xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 backdrop-blur-sm"
+              className="rounded-3xl p-10 shadow-xl border border-gray-200 dark:border-gray-700 backdrop-blur-sm"
               style={{
                 backgroundColor: "var(--color-bg-card)",
               }}
@@ -244,14 +272,14 @@ export default function Contact() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField(field)}
                       onBlur={() => setFocusedField(null)}
-                      className="w-full px-4 py-3 rounded-xl outline-none border-2 transition-all placeholder-gray-500"
+                      className="w-full px-4 py-3 rounded-xl outline-none border transition-all placeholder-gray-500"
                       style={{
                         backgroundColor: "var(--color-bg-section)",
                         color: "var(--color-text-primary)",
                         borderColor:
                           focusedField === field
                             ? "var(--color-primary)"
-                            : "var(--color-border, #d1d5db)",
+                            : "rgba(0,0,0,0.1)",
                       }}
                       required
                     />
@@ -268,14 +296,14 @@ export default function Contact() {
                     onChange={handleChange}
                     onFocus={() => setFocusedField(field)}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 py-3 rounded-xl outline-none border-2 transition-all text-gray-900 dark:text-gray-100 placeholder-gray-500"
+                    className="w-full px-4 py-3 rounded-xl outline-none border transition-all placeholder-gray-500"
                     style={{
                       backgroundColor: "var(--color-bg-section)",
                       color: "var(--color-text-primary)",
                       borderColor:
                         focusedField === field
                           ? "var(--color-primary)"
-                          : "var(--color-border, #d1d5db)",
+                          : "rgba(0,0,0,0.1)",
                     }}
                     required
                   />
@@ -288,14 +316,14 @@ export default function Contact() {
                   onChange={handleChange}
                   onFocus={() => setFocusedField("message")}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full px-4 py-3 rounded-xl outline-none min-h-35 resize-none border-2 transition-all text-gray-900 dark:text-gray-100 placeholder-gray-500"
+                  className="w-full px-4 py-3 rounded-xl outline-none min-h-35 resize-none border transition-all placeholder-gray-500"
                   style={{
                     backgroundColor: "var(--color-bg-section)",
                     color: "var(--color-text-primary)",
                     borderColor:
                       focusedField === "message"
                         ? "var(--color-primary)"
-                        : "var(--color-border, #d1d5db)",
+                        : "rgba(0,0,0,0.1)",
                   }}
                   required
                 />
@@ -303,7 +331,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full text-white py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
+                  className="w-full text-white py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg hover:scale-[1.01]"
                   style={{
                     background:
                       "linear-gradient(to right, var(--color-primary), var(--color-secondary))",

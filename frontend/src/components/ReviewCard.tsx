@@ -3,6 +3,7 @@
  * @description This is the Review Card Component
  * @date 25-02-2026
  * @returns a TSX component
+ * This file is not being used as asked by the client, if needed in future, reviews component can be reused from this file and Reviews.tsx
  */
 
 // Imports
@@ -44,8 +45,11 @@ export default function ReviewCard({
   icon,
   colorIndex = 0,
 }: ReviewCardProps) {
+  // Logic
+  
   const color = colors[colorIndex % colors.length];
 
+  // Return
   return (
     <div
       className="
@@ -147,4 +151,4 @@ export default function ReviewCard({
       </div>
     </div>
   );
-}
+};

@@ -1,6 +1,6 @@
 /** Slider.tsx
  * @author Dibyasmita
- * @description Slider / Hero Component with background carousel
+ * @description Slider Component with background carousel
  * @date 18-1-2026
  * @returns a TSX component
  */
@@ -19,6 +19,8 @@ import { heroSlides } from "@/lib/details";
 
 // Exports
 export default function Slider() {
+  // Logic
+  
   const [current, setCurrent] = useState<number>(0);
 
   /* Auto Slide */
@@ -37,6 +39,7 @@ export default function Slider() {
   const next = () =>
     setCurrent((prev) => (prev + 1) % heroSlides.length);
 
+  // Return
   return (
     <section
       id="home"
@@ -198,4 +201,4 @@ export default function Slider() {
       </div>
     </section>
   );
-}
+};

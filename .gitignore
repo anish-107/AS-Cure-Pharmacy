@@ -2,6 +2,8 @@
 # @authors Dibyasmita
 # @date 25 - 02 - 2026
 # @description Contains the files and directories to ignore.
+# @returns Nothing
+#
 
 # Python-generated files
 __pycache__/
@@ -24,6 +26,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Modules
 node_modules
 dist
 dist-ssr
@@ -45,3 +48,4 @@ dist-ssr
 **/*.pdf
 **/*.docx
 **/*.txt
+TODO.md

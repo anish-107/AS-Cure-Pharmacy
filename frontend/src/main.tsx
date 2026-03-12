@@ -1,6 +1,6 @@
 /** main.tsx
  * @author Dibyasmita
- * @date 18-1-2026
+ * @date 1-2-2026
  * @description This file is the main tsx file that will be renedered on the `index.html` file.
  * @returns A TSX Page
  */

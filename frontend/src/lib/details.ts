@@ -9,6 +9,16 @@
 
 // Imports
 import type { LucideIcon } from "lucide-react";
+import {
+  ShieldCheck,
+  Gauge,
+  Heart,
+  FlaskConical,
+  Handshake,
+  Sparkles,
+} from "lucide-react";
+
+// About Us Section
 
 // Type Definitions
 export type StatItem = {
@@ -32,28 +42,30 @@ export type SectionContent = {
 
 // About Us Content
 export const aboutUsContent: SectionContent = {
-  badge: "About Us",
+  badge: "Our Mission",
   title: "Delivering Trusted",
-  highlightedTitle: "Healthcare Solutions",
+  highlightedTitle: "Healing & Care",
   description:
-    "At A S Cure Pharma, our mission is to enhance lives by providing safe, reliable, and high-quality pharmaceutical products. We believe that healthcare should be accessible, trustworthy, and effective for everyone. Our team works with dedication and scientific precision to develop medicines that meet the highest standards of safety, efficacy, and quality. Through continuous innovation, advanced manufacturing practices, and strict regulatory compliance, we strive to deliver healthcare solutions that professionals and patients can depend on every day.",
+    "We believe that medicine is more than just a product—it is a promise of recovery. A S Cure Pharma is dedicated to enhancing lives by providing safe, reliable, and high-quality pharmaceutical treatments. By combining advanced manufacturing practices with a human-centric approach, we ensure that every formulation we craft meets the highest standards of scientific integrity and therapeutic value.",
 
   points: [
-    "Manufacturing safe, effective, and high-quality pharmaceutical products",
-    "Maintaining strict quality control and regulatory compliance at every stage",
-    "Driven by experienced professionals and supported by modern infrastructure",
-    "Committed to improving patient health and overall healthcare outcomes",
-    "Focused on innovation, reliability, and long-term healthcare impact",
+    "Crafting safe and effective medicines with scientific precision",
+    "Guaranteed quality validation at every stage of production",
+    "Built on a foundation of expert research and modern ethics",
+    "Empowering communities through reliable healthcare access",
+    "A legacy of trust, healing, and improved patient outcomes",
   ],
 
   image: {
-    src: "assets/about-us.png",
-    alt: "A S Cure Pharma Production Facility",
+    src: "assets/hero-1.png",
+    alt: "A S Cure Pharma - Trusted Healthcare",
   },
 };
 
 
 // Hero / Slider Section
+
+// Type Definitions
 export type HeroSlide = {
   image: string;
   title: string;
@@ -61,6 +73,7 @@ export type HeroSlide = {
   accent: string;
 };
 
+// Content
 export const heroSlides: HeroSlide[] = [
   {
     image: "assets/hero-1.png",
@@ -84,6 +97,8 @@ export const heroSlides: HeroSlide[] = [
 
 
 // Products Section
+
+// Type Definitions
 export type ProductItem = {
   name: string;
   composition: string;
@@ -93,6 +108,7 @@ export type ProductItem = {
   featured?: boolean;
 };
 
+// Content
 export const productsList: ProductItem[] = [
   {
     name: "RABTORIN DSR",
@@ -108,6 +124,7 @@ export const productsList: ProductItem[] = [
     image: "products/rabtorin-dsr.jpg",
     featured: true,
   },
+  
   {
     name: "FLEMIREX SP",
     composition:
@@ -123,6 +140,7 @@ export const productsList: ProductItem[] = [
     image: "products/flemirex-sp.jpg",
     featured: true,
   },
+  
   {
     name: "GABINOXIN-300 NT",
     composition: "Gabapentin (300mg) + Nortriptyline (10mg)",
@@ -135,8 +153,9 @@ export const productsList: ProductItem[] = [
       "Helps improve patient comfort and quality of life",
     ],
     image: "products/gabinoxin-300-nt.jpg",
-    featured: true,
+    featured: false,
   },
+  
   {
     name: "GABINOXIN-100 NT",
     composition: "Gabapentin (100mg) + Nortriptyline (10mg)",
@@ -149,27 +168,20 @@ export const productsList: ProductItem[] = [
       "Designed for consistent and reliable therapy",
     ],
     image: "products/gabinoxin-100-nt.jpg",
-    featured: true,
+    featured: false,
   },
 ];
 
 // Why Choose Us Section
 
-import {
-  ShieldCheck,
-  Gauge,
-  Heart,
-  FlaskConical,
-  Handshake,
-  Sparkles,
-} from "lucide-react";
-
+// Type Definitions
 export type WhyChooseItem = {
   icon: typeof ShieldCheck;
   title: string;
   description: string;
 };
 
+// Content
 export const whyChooseContent = {
   badge: "Our Advantages",
   title: "Why Choose",
@@ -212,39 +224,5 @@ export const whyChooseList: WhyChooseItem[] = [
     title: "Innovation-Driven Excellence",
     description:
       "We continuously explore advanced formulation technologies, taste masking solutions, and patient-compliance innovations to make our medicines more effective and patient-friendly.",
-  },
-];
-
-// Reviews / Testimonials Section
-export type ReviewItem = {
-  name: string;
-  role: string;
-  message: string;
-};
-
-export const reviewsContent = {
-  badge: "Testimonials",
-  title: "What People",
-  highlightedTitle: "Say About Us",
-};
-
-export const reviewsList: ReviewItem[] = [
-  {
-    name: "Dr. Amit Sharma",
-    role: "Consultant Physician",
-    message:
-      "A S Cure Pharma consistently delivers high-quality products that I confidently prescribe to my patients.",
-  },
-  {
-    name: "Rahul Verma",
-    role: "Pharma Distributor",
-    message:
-      "Their commitment to quality, timely supply, and transparent communication sets them apart in the market.",
-  },
-  {
-    name: "Raman Patel",
-    role: "Healthcare Partner",
-    message:
-      "Reliable formulations and ethical practices make A S Cure Pharma a trusted long-term partner.",
   },
 ];

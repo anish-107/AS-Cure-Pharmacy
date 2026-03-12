@@ -18,7 +18,12 @@ const HomePage = lazy(() => import("@/pages/HomePage"));
 
 // Export
 export default function App() {
+  // Logic
+  // If needed in future
+  
+  // Return 
   return (
+    // Router 
     <BrowserRouter>
       <Suspense fallback={<div className="p-6">Loading...</div>}>
         <Routes>
