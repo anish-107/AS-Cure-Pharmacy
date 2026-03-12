@@ -1,29 +1,31 @@
 '''database.py
-@authors Anish, Dibyasmita
-@date 25 - 02 - 2026
-@description Sets up the SQLAlchemy database engine, session management, and base declarative class.
+@authors Dibyasmita
+@date 20 - 02 - 2026
+@description Database connection configuration.
 '''
 
-
-# Third-party and local imports for SQLAlchemy connection handling and environment settings
+# Imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from app.core.config import settings
 
+# DB URL
+DATABASE_URL = settings.DATABASE_URL
 
-# Create the core SQLAlchemy engine to connect to the PostgreSQL database URL
-engine = create_engine(settings.DATABASE_URL)
+# DB Engine
+engine = create_engine(DATABASE_URL)
 
+# Session Config
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
-# Set up a session factory to manage database transactions without auto-committing
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-# Base class that all database models will inherit from to map to actual database tables
+# Base Declaration
 Base = declarative_base()
 
 
-# Dependency generator to provide an independent database session per request and safely close it afterward
 def get_db():
     db = SessionLocal()
     try:

@@ -5,7 +5,7 @@
 '''
 
 
-# Third-party imports for base data modeling and strict email string validation
+# Imports
 from pydantic import BaseModel, EmailStr
 
 

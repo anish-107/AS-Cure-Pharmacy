@@ -4,13 +4,13 @@
 @description Handles formatting and sending asynchronous emails for the contact form.
 '''
 
-# Third-party imports for email handling, and local imports for config and schemas
+# Imports
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from app.core.config import settings
 from app.schemas.contact import ContactFormCreate
 
 
-# Configure the SMTP connection using environment variables loaded securely
+# Configure the SMTP connection using environment variables
 conf = ConnectionConfig(
     MAIL_USERNAME=settings.MAIL_USERNAME,
     MAIL_PASSWORD=settings.MAIL_PASSWORD, #type: ignore

@@ -1,81 +1,282 @@
-# Departmental Website Backend
+<!-- README.md
+@author Dibyasmita
+@date 18-1-2026
+@description This file contains the backend documentation for the AS Cure Pharma website.
+@returns Markdown Page
+-->
 
-This is a lightweight and fast backend API built with Python and FastAPI. It is designed to connect to a React frontend and handle two main tasks: managing user reviews and processing a contact form with automated email routing.
+# AS Cure Pharma Backend
 
-## Features
-
-* **Review Management:** Allows the frontend to submit new reviews and fetch the top 10 most recent reviews from the database.
-* **Contact Form & Emails:** Receives contact form submissions, saves them to the database, and automatically sends two emails: a notification to the department administrator and a confirmation reply to the user.
-* **Spam Protection:** Includes IP-based rate limiting to prevent bots from overwhelming the database or the email server.
-* **Serverless Ready:** Configured to be deployed easily on Vercel using a database connection pooler.
-
-## Prerequisites
-
-Before running this project, you will need:
-* Python installed on your machine.
-* `uv` (Python package manager) installed.
-* A PostgreSQL database (Supabase is recommended).
-* A Gmail account with a generated 16-digit "App Password" to send emails.
-
-## Environment Variables
-
-Create a file named `.env` in the root directory of the project. Do not share this file or upload it to GitHub. Add the following variables:
-
-```env
-# Database Connection
-DATABASE_URL=postgresql://postgres:[PASSWORD]@db.[PROJECT_REF].supabase.co:5432/postgres
-
-# Email Configuration
-MAIL_USERNAME=your_bot_email@gmail.com
-MAIL_PASSWORD=your_16_digit_app_password
-MAIL_FROM=your_bot_email@gmail.com
-MAIL_PORT=465
-MAIL_SERVER=smtp.gmail.com
-MAIN_EMAIL_TO=admin_receiving_inbox@college.edu
-
-```
-
-## Local Development Setup
-
-1. **Initialize the project and install dependencies:**
-Open your terminal in the project folder and run:
-```bash
-uv sync
-
-```
-
-
-2. **Start the development server:**
-```bash
-uv run fastapi dev app/main.py
-
-```
-
-
-3. **View the interactive documentation:**
-Once the server is running, open your web browser and go to `http://127.0.0.1:8000/docs` to test the API endpoints directly.
-
-## API Endpoints
-
-### Reviews
-
-* `GET /api/reviews/` - Fetches the top 10 most recent reviews. (Limit: 30 requests per minute per IP).
-* `POST /api/reviews/` - Submits a new review to the database. Requires name, email, star rating (1-5), and text. (Limit: 5 requests per minute per IP).
-
-### Contact
-
-* `POST /api/contact/` - Submits a new contact form, saves it, and triggers the automated emails. (Limit: 3 requests per hour per IP).
-
-## Deployment Notes (Vercel)
-
-This project is configured for Vercel deployment.
-
-1. Ensure the `vercel.json` and `requirements.txt` files are present in the root directory.
-2. If adding new packages, update the requirements file by running: `uv export > requirements.txt`.
-3. When setting your environment variables in the Vercel dashboard, make sure to use your database's **Connection Pooler URL** (typically using port 6543) instead of the standard database URL to prevent connection exhaustion.
+**Official Backend API Repository**
 
 ---
 
-**Authors:** Dibyasmita
+## Table of Contents
 
-**Date:** February 2026
+1. Overview  
+2. Technology Stack  
+3. Project Architecture  
+4. API Features  
+5. Local Development Setup  
+6. File Locations  
+7. Build & Deployment  
+8. Changes Guidelines  
+
+---
+
+# 1. Overview
+
+This repository contains the **backend service** for the **AS Cure Pharma official website**.
+
+The backend is responsible for:
+
+* Handling contact form submissions
+* Sending automated email notifications
+* Saving contact messages to the database
+* Protecting the API from spam using rate limiting
+
+The backend exposes a **REST API** that is consumed by the **React frontend application**.
+
+The project is designed to be:
+
+* Lightweight
+* Secure
+* Easy to deploy
+* Compatible with serverless environments
+
+---
+
+# 2. Technology Stack
+
+The backend application is built using the following technologies:
+
+| Technology | Purpose |
+|-----------|--------|
+| **FastAPI** | High-performance Python API framework |
+| **PostgreSQL** | Database for storing contact form submissions |
+| **Supabase** | Hosted PostgreSQL database service |
+| **Pydantic** | Data validation and request schemas |
+| **Uvicorn** | ASGI server for running FastAPI |
+| **Gmail SMTP** | Email delivery service |
+
+---
+
+# 3. Project Architecture
+
+The backend follows a **modular architecture** to keep responsibilities separated.
+
+```plaintext
+backend/
+│
+├── app/
+│   │
+│   ├── api/                 # API route definitions
+│   │   └── contact.py       # Contact form endpoint
+│   │
+│   ├── core/                # Core configuration and utilities
+│   │   ├── config.py        # Environment variable configuration
+│   │   └── limiter.py       # Rate limiting configuration
+│   │
+│   ├── db/                  # Database layer
+│   │   ├── database.py      # Database connection setup
+│   │   └── models.py        # SQLAlchemy models
+│   │
+│   ├── schemas/             # Request and response schemas
+│   │   └── contact.py       # Contact form validation schema
+│   │
+│   ├── services/            # Business logic layer
+│   │   └── email.py         # Email sending service
+│   │
+│   ├── main.py              # FastAPI application entry point
+│   └── __init__.py
+│
+├── .env                     # Environment variables
+├── requirements.txt         # Python dependencies
+├── pyproject.toml           # Project configuration
+├── vercel.json              # Vercel deployment configuration
+└── README.md                # Backend documentation
+````
+
+This architecture ensures:
+
+* Clear separation of API, database, and services
+* Easy debugging
+* Maintainable codebase
+* Scalable structure for future features
+
+---
+
+# 4. API Features
+
+The backend currently supports the following functionality.
+
+## Contact Form API
+
+The API receives contact form submissions from the frontend.
+
+After receiving the form data, the backend will:
+
+1. Validate the request
+2. Save the message to the database
+3. Send two emails
+
+### Emails Sent
+
+**Admin Notification Email**
+
+Sent to the company administrator containing:
+
+* Name
+* Email
+* Subject
+* Message
+
+**User Confirmation Email**
+
+Sent to the user confirming that their message was received.
+
+---
+
+## Spam Protection
+
+To protect the server and email system from abuse, the API includes **IP-based rate limiting**.
+
+Example limits:
+
+| Endpoint     | Limit                      |
+| ------------ | -------------------------- |
+| Contact Form | 3 requests per hour per IP |
+
+---
+
+# 5. Local Development Setup
+
+## Prerequisites
+
+You must have the following installed:
+
+* Python 3.10+
+* `uv` package manager
+* PostgreSQL database
+
+---
+
+## Installation
+
+Clone the repository and navigate into the backend folder.
+
+```bash
+git clone https://github.com/<your-username>/as-cure-pharma.git
+cd backend
+```
+
+Install dependencies:
+
+```bash
+uv sync
+```
+
+---
+
+## Start Development Server
+
+```bash
+uv run fastapi dev app/main.py
+```
+
+The API will run at:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## API Documentation
+
+FastAPI automatically generates interactive API documentation.
+
+Open the following URL:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+You can test all endpoints directly from this interface.
+
+---
+
+# 6. Environment Variables
+
+Create a `.env` file in the project root.
+
+Example configuration:
+
+```env
+# Database
+DATABASE_URL=postgresql://postgres:[PASSWORD]@db.[PROJECT_REF].supabase.co:5432/postgres
+
+# Email Configuration
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_16_digit_app_password
+MAIL_FROM=your_email@gmail.com
+MAIL_PORT=465
+MAIL_SERVER=smtp.gmail.com
+
+# Admin Email
+MAIN_EMAIL_TO=admin_email@example.com
+```
+
+Important:
+
+* Do **not commit the `.env` file to GitHub**
+* Always use **environment variables in production**
+
+---
+
+# 7. Build & Deployment
+
+This backend is configured for **Vercel serverless deployment**.
+
+Deployment files included:
+
+```
+vercel.json
+requirements.txt
+```
+
+When deploying to Vercel:
+
+1. Add environment variables in the **Vercel dashboard**
+2. Use the **database connection pooler URL** if using Supabase
+3. Ensure the correct Python runtime is detected
+
+---
+
+# 8. Changes Guidelines
+
+When modifying the backend:
+
+* Follow the existing folder structure
+* Keep API routes inside `/api`
+* Place business logic inside `/services`
+* Validate all request data using **Pydantic schemas**
+* Avoid placing logic inside route files
+
+Always test the API using:
+
+```
+/docs
+```
+
+before deploying.
+
+---
+
+# License
+
+This project is proprietary and owned by **AS Cure Pharma**.
+
+Unauthorized distribution or reuse is not permitted.
+
+```
