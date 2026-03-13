@@ -9,6 +9,7 @@
 // Rules
 "use client";
 
+
 // Imports
 import Header from '@/components/Header';
 import Slider from '@/components/Slider';
@@ -32,36 +33,43 @@ export default function LandingPage() {
       {/* Header Section */}
       <Header />  
 
+      
       {/*Sliding Images Section*/}
       <section id="home">
         <Slider />
       </section>
 
+      
       {/*About Us Section*/}
       <section id="about">
         <AboutUs />
       </section>
 
+      
       {/*Products Section*/}
       <section id="products">
         <Products />
       </section>
 
+      
       {/*Hero Section*/}
       <section id="why-us">
         <Hero />
       </section>
+      
       
       {/*Associate Manufacturer Section*/}
       <section id="associates">
         <Associates />
       </section>
 
+      
       {/*Contact Section*/}
       <section id="contact">
         <Contact />
       </section>
 
+      
       {/*Footer Section*/}
       <Footer />
     </>

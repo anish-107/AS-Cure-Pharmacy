@@ -2,7 +2,8 @@
 # @author Dibyasmita
 # @date 18-1-2026
 # @description This file contains the name of files that should not be pushed to github.
-# @returns Nothing
+# @returns List of files to ignore
+#
 
 
 # Logs

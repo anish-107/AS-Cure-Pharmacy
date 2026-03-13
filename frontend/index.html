@@ -5,22 +5,105 @@
 @returns An HTML Page.
 -->
 
-
+<!-- Declaration -->
 <!doctype html>
+
 <html lang="en">
 
   <!-- Meta Content -->
   <head>
+
+    <!-- Charset -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png+xml" href="src/assets/icon.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/icon.png" />
+
+    <!-- Responsive Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A S CURE PHARMA</title>
+
+    <!-- Title -->
+    <title>A S Cure Pharmacy | Order Medicines Online</title>
+
+    <!-- SEO Description -->
+    <meta 
+      name="description"
+      content="A S Cure Pharmacy provides quality medicines online with trusted pharmaceutical services and convenient ordering."
+    />
+
+    <!-- SEO Keywords -->
+    <meta 
+      name="keywords"
+      content="pharmacy, medicines online, pharmacy delivery, buy medicines online, AS Cure Pharmacy"
+    />
+
+    <!-- Author -->
+    <meta name="author" content="A S Cure Pharmacy" />
+
+    <!-- Search Engine Crawling -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link 
+      rel="canonical"
+      href="https://as-cure-pharmacy.vercel.app/"
+    />
+
+    <!-- Open Graph Meta Tags (Social Media Sharing) -->
+    <meta property="og:title" content="A S Cure Pharmacy" />
+    <meta 
+      property="og:description" 
+      content="Order medicines online from A S Cure Pharmacy with trusted pharmaceutical services."
+    />
+    <meta 
+      property="og:image" 
+      content="https://as-cure-pharmacy.vercel.app/icon.png"
+    />
+    <meta 
+      property="og:url" 
+      content="https://as-cure-pharmacy.vercel.app/"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="A S Cure Pharmacy" />
+    <meta 
+      name="twitter:description"
+      content="Order medicines online from A S Cure Pharmacy with trusted pharmaceutical services."
+    />
+    <meta 
+      name="twitter:image"
+      content="https://as-cure-pharmacy.vercel.app/icon.png"
+    />
+
+    <!-- Structured Data for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Pharmacy",
+      "name": "A S Cure Pharmacy",
+      "url": "https://as-cure-pharmacy.vercel.app/",
+      "logo": "https://as-cure-pharmacy.vercel.app/icon.png",
+      "description": "A S Cure Pharmacy provides trusted pharmaceutical services and quality medicines online.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "India"
+      }
+    }
+    </script>
+
   </head>
   
   <!-- Body Content -->
   <body>
+
+    <!-- React Root -->
     <div id="root"></div>
+
+    <!-- Main Script -->
     <script type="module" src="/src/main.tsx"></script>
+
   </body>
 
 </html>

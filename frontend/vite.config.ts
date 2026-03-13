@@ -13,13 +13,14 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 
-// Configurations
+// Export Configurations
 export default defineConfig({
   // Plugins Used
   plugins: [
     react(),
     tailwindcss(),
   ],
+  
   
   // Resolve Symbols
   resolve: {

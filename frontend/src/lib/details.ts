@@ -18,6 +18,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
+
 // About Us Section
 
 // Type Definitions

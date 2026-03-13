@@ -5,10 +5,13 @@
  * @returns Typescript Configurations
  */
  
+ 
 // Rules
 {
+  
   /* Files */
   "files": [],
+  
   
   /* References */
   "references": [
@@ -19,6 +22,7 @@
       "path": "./tsconfig.node.json"
     }
   ],
+  
   
   /* Compiler options */
   "compilerOptions": {

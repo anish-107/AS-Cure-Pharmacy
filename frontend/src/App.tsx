@@ -27,7 +27,7 @@ export default function App() {
     <BrowserRouter>
       <Suspense fallback={<div className="p-6">Loading...</div>}>
         <Routes>
-          {/* Public / root */}
+          {/* root */}
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
           </Route>

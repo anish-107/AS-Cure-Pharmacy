@@ -17,6 +17,8 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 
 // Rules
 export default defineConfig([
+  
+  // Files to ignore
   globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],

@@ -2,7 +2,7 @@
 # @authors Dibyasmita
 # @date 25 - 02 - 2026
 # @description Contains the files and directories to ignore.
-# @returns Nothing
+# @returns List of files to ignore
 #
 
 # Python-generated files
